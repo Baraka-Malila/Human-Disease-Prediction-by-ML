@@ -9,52 +9,135 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <div class="title-section">
-                    <h1>Disease Prediction System</h1>
-                    <p class="subtitle">Enter your symptoms to get a prediction</p>
-                </div>
-                <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </header>
+    <div class="theme-toggle">
+        <button id="themeToggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
 
-        <main>
-            <div class="content-wrapper">
-                <div class="symptoms-list">
-                    <h2>Valid Symptoms</h2>
-                    <div class="search-container">
-                        <input type="text" id="symptomSearch" placeholder="Search symptoms..." />
-                    </div>
-                    <div class="symptoms-container" id="symptomsList">
-                        <!-- Symptoms will be populated here -->
-                    </div>
-                </div>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Disease Prediction System</h1>
+            <p class="subtitle">Advanced AI-powered disease prediction using machine learning</p>
+            <a href="#prediction-section" class="cta-button">Start Prediction</a>
+        </div>
+    </header>
 
-                <div class="chat-container">
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="message bot">
-                            <div class="message-content">
-                                Hello! I'm here to help you diagnose diseases. Please select or enter your symptoms from the list on the left. You need to enter at least three symptoms for a more accurate prediction.
+    <main>
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Our System</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Our Disease Prediction System leverages cutting-edge machine learning technology to provide accurate disease predictions based on symptoms. Using a Support Vector Machine (SVM) model trained on extensive medical data, we offer reliable predictions to help guide healthcare decisions.</p>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-brain"></i>
+                                <h3>AI-Powered</h3>
+                                <p>Advanced machine learning algorithms</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h3>Accurate</h3>
+                                <p>High-precision predictions</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-bolt"></i>
+                                <h3>Fast</h3>
+                                <p>Real-time predictions</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>Secure</h3>
+                                <p>Your data is protected</p>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="input-container">
-                        <input type="text" id="symptomInput" placeholder="Enter symptoms (e.g., headache, fever, cough)" />
-                        <button id="predictBtn">Predict</button>
+        <section id="history" class="section">
+            <div class="container">
+                <h2>Our History</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2024</h3>
+                            <p>Launched the Disease Prediction System with advanced SVM model</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2023</h3>
+                            <p>Developed and trained the machine learning model</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>2022</h3>
+                            <p>Initial research and data collection</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </section>
 
-        <footer>
-            <p>Note: This is an AI-based prediction system and should not be used as a substitute for professional medical advice.</p>
-        </footer>
-    </div>
+        <section id="prediction-section" class="section">
+            <div class="container">
+                <h2>Disease Prediction</h2>
+                <div class="prediction-container">
+                    <div class="input-section">
+                        <div class="search-container">
+                            <input type="text" id="symptomSearch" placeholder="Search symptoms...">
+                            <div id="symptomSuggestions" class="suggestions"></div>
+                        </div>
+                        <div class="selected-symptoms">
+                            <h3>Selected Symptoms</h3>
+                            <div id="selectedSymptoms" class="symptom-tags"></div>
+                        </div>
+                        <button id="predictButton" class="predict-button">Predict Disease</button>
+                    </div>
+                    <div class="result-section">
+                        <div id="loadingAnimation" class="loading-animation" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Analyzing symptoms...</p>
+                        </div>
+                        <div id="predictionResult" class="prediction-result" style="display: none;">
+                            <h3>Prediction Result</h3>
+                            <div id="resultContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>We're dedicated to improving healthcare through technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#history">History</a></li>
+                        <li><a href="#prediction-section">Prediction</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: support@diseaseprediction.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Disease Prediction System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
