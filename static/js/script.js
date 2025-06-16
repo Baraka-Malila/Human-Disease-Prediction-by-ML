@@ -118,7 +118,77 @@ document.addEventListener('DOMContentLoaded', function() {
         predictButton.disabled = selectedSymptomSet.size < 3;
     }
 
-    // Handle prediction
+    // Prediction History
+    let predictionHistory = JSON.parse(localStorage.getItem('predictionHistory') || '[]');
+    const historyList = document.getElementById('historyList');
+    const historySearch = document.getElementById('historySearch');
+    const historySort = document.getElementById('historySort');
+    const newPredictionButton = document.getElementById('newPredictionButton');
+
+    // Function to add prediction to history
+    function addToHistory(prediction, symptoms) {
+        const historyItem = {
+            id: Date.now(),
+            date: new Date().toISOString(),
+            prediction: prediction,
+            symptoms: symptoms
+        };
+        predictionHistory.unshift(historyItem);
+        localStorage.setItem('predictionHistory', JSON.stringify(predictionHistory));
+        updateHistoryDisplay();
+    }
+
+    // Function to update history display
+    function updateHistoryDisplay() {
+        const searchTerm = historySearch.value.toLowerCase();
+        const sortOrder = historySort.value;
+        
+        let filteredHistory = predictionHistory.filter(item => 
+            item.prediction.toLowerCase().includes(searchTerm) ||
+            item.symptoms.some(symptom => symptom.toLowerCase().includes(searchTerm))
+        );
+
+        if (sortOrder === 'oldest') {
+            filteredHistory = filteredHistory.reverse();
+        }
+
+        historyList.innerHTML = filteredHistory.map(item => `
+            <div class="history-item">
+                <div class="history-item-header">
+                    <span class="history-item-disease">${item.prediction}</span>
+                    <span class="history-item-date">${new Date(item.date).toLocaleString()}</span>
+                </div>
+                <div class="history-item-symptoms">
+                    ${item.symptoms.map(symptom => 
+                        `<span class="history-item-symptom">${symptom}</span>`
+                    ).join('')}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Event listeners for history filters
+    historySearch.addEventListener('input', updateHistoryDisplay);
+    historySort.addEventListener('change', updateHistoryDisplay);
+
+    // New Prediction Button
+    newPredictionButton.addEventListener('click', function() {
+        // Clear current prediction
+        selectedSymptomSet.clear();
+        selectedSymptoms.innerHTML = '';
+        symptomSearch.value = '';
+        predictionResult.style.display = 'none';
+        resultContent.innerHTML = '';
+        
+        // Hide new prediction button and show predict button
+        newPredictionButton.style.display = 'none';
+        predictButton.style.display = 'block';
+        
+        // Scroll to prediction section
+        document.getElementById('prediction-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Update prediction handler
     predictButton.addEventListener('click', async function() {
         if (selectedSymptomSet.size < 3) return;
 
@@ -126,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
         predictionResult.style.display = 'none';
 
         try {
-            // Convert symptoms array to comma-separated string
             const symptomsString = Array.from(selectedSymptomSet).join(',');
             
             const response = await fetch('/predict', {
@@ -135,19 +204,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    symptoms: symptomsString  // Send as comma-separated string
+                    symptoms: symptomsString
                 })
             });
 
             const data = await response.json();
 
-            // Simulate thinking time
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             if (data.error) {
                 resultContent.innerHTML = `<div class="error-message">${data.error}</div>`;
             } else {
-                // Format the prediction and matched symptoms
                 const prediction = typeof data.prediction === 'string' ? data.prediction : data.prediction[0];
                 const matchedSymptoms = Array.isArray(data.matched_symptoms) ? data.matched_symptoms : [data.matched_symptoms];
                 
@@ -161,6 +228,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         </ul>
                     </div>
                 `;
+
+                // Add to history
+                addToHistory(prediction, matchedSymptoms);
+
+                // Show new prediction button and hide predict button
+                newPredictionButton.style.display = 'block';
+                predictButton.style.display = 'none';
             }
         } catch (error) {
             console.error('Prediction error:', error);
@@ -185,4 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <p><strong>Medical Disclaimer:</strong> This system is for informational purposes only and should not be used as a substitute for professional medical advice, diagnosis, or treatment.</p>
     `;
     document.querySelector('.prediction-container').appendChild(disclaimer);
+
+    // Initial history display
+    updateHistoryDisplay();
 }); 

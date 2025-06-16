@@ -533,4 +533,119 @@ body {
     background-color: rgba(220, 53, 69, 0.1);
     border-radius: 4px;
     margin-top: 10px;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.new-prediction-button {
+    padding: 12px 24px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.new-prediction-button:hover {
+    background-color: var(--primary-color);
+}
+
+/* History Section */
+.history-container {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.history-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.history-filters input,
+.history-filters select {
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.history-filters input {
+    flex: 1;
+}
+
+.history-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.history-item {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.history-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.history-item-date {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.history-item-disease {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.history-item-symptoms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.history-item-symptom {
+    background-color: var(--card-bg);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+/* Responsive Design for History Section */
+@media (max-width: 768px) {
+    .history-filters {
+        flex-direction: column;
+    }
+    
+    .history-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
 } 

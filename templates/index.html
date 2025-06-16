@@ -96,7 +96,10 @@
                             <h3>Selected Symptoms</h3>
                             <div id="selectedSymptoms" class="symptom-tags"></div>
                         </div>
-                        <button id="predictButton" class="predict-button">Predict Disease</button>
+                        <div class="button-group">
+                            <button id="predictButton" class="predict-button">Predict Disease</button>
+                            <button id="newPredictionButton" class="new-prediction-button" style="display: none;">New Prediction</button>
+                        </div>
                     </div>
                     <div class="result-section">
                         <div id="loadingAnimation" class="loading-animation" style="display: none;">
@@ -107,6 +110,24 @@
                             <h3>Prediction Result</h3>
                             <div id="resultContent"></div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prediction-history" class="section">
+            <div class="container">
+                <h2>Prediction History</h2>
+                <div class="history-container">
+                    <div class="history-filters">
+                        <input type="text" id="historySearch" placeholder="Search history...">
+                        <select id="historySort">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                    <div id="historyList" class="history-list">
+                        <!-- History items will be populated here -->
                     </div>
                 </div>
             </div>
