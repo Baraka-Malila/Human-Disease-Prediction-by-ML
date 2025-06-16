@@ -6,12 +6,20 @@
     <title>Disease Prediction System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Disease Prediction System</h1>
-            <p class="subtitle">Enter your symptoms to get a prediction</p>
+            <div class="header-content">
+                <div class="title-section">
+                    <h1>Disease Prediction System</h1>
+                    <p class="subtitle">Enter your symptoms to get a prediction</p>
+                </div>
+                <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </header>
 
         <main>
