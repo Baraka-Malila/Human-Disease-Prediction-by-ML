@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Disease Prediction System</h1>
+            <p class="subtitle">Enter your symptoms to get a prediction</p>
+        </header>
+
+        <main>
+            <div class="content-wrapper">
+                <div class="symptoms-list">
+                    <h2>Valid Symptoms</h2>
+                    <div class="search-container">
+                        <input type="text" id="symptomSearch" placeholder="Search symptoms..." />
+                    </div>
+                    <div class="symptoms-container" id="symptomsList">
+                        <!-- Symptoms will be populated here -->
+                    </div>
+                </div>
+
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot">
+                            <div class="message-content">
+                                Hello! I'm here to help you diagnose diseases. Please select or enter your symptoms from the list on the left. You need to enter at least three symptoms for a more accurate prediction.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="text" id="symptomInput" placeholder="Enter symptoms (e.g., headache, fever, cough)" />
+                        <button id="predictBtn">Predict</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Note: This is an AI-based prediction system and should not be used as a substitute for professional medical advice.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html> 
